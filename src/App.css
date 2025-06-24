@@ -5,3 +5,31 @@
   text-align: center;
 }
  */
+
+* {
+  padding: 0;
+  margin: 0;
+}
+#Container {
+  min-height: 100vh;
+  width: 100vw;
+  background-color: blueviolet;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+#Header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100vw;
+  height: 50px;
+  background-color: #492f51;
+}
+#Header h2 {
+  color: white;
+  font-size: larger;
+  font-weight: 400;
+}
