@@ -128,7 +128,9 @@ function App() {
             onChange={(e) => setSelectedCategoryHandler(e.target.value)}
           >
             {categories.map((category) => (
-              <option key={category}>{category}</option>
+              <option value={category} key={category}>
+                {category}
+              </option>
             ))}
           </select>
         </div>
@@ -136,7 +138,24 @@ function App() {
           {loading ? (
             <ClipLoader color="#000" size={50} />
           ) : (
-            products.map((product) => <div key={product.id}>{product.id}</div>)
+            products.map((product) => (
+              <div key={product.id} className="product-card">
+                <img
+                  src={product.image}
+                  alt={product.title}
+                  width="300"
+                  height="200"
+                />
+                <div className="product-info">
+                  <h3 className="product-title">{product.title}</h3>
+                  <p className="product-price">Price : {product.price}</p>
+                  <p className="product-rating">
+                    Rating : ⭐ {product.rating.rate}/5
+                  </p>
+                </div>
+                <button className="add-to-cart">Add to cart</button>
+              </div>
+            ))
           )}
         </div>
       </div>

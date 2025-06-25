@@ -16,7 +16,7 @@
   background-color: blueviolet;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
 }
 #Header {
@@ -32,4 +32,37 @@
   color: white;
   font-size: larger;
   font-weight: 400;
+}
+
+#Products {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  padding: 5px;
+  border-radius: 5px;
+  background: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  text-align: center;
+}
+.add-to-cart {
+  width: 70px;
+  margin: 15px 0;
+  padding: 10px;
+  font-size: small;
+  cursor: pointer;
+  font-weight: bolder;
+  transition: all 0.3s ease;
+}
+.add-to-cart:hover {
+  background-color: blue;
+  transform: scale(1.05);
 }
