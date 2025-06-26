@@ -2,6 +2,9 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
+import Title from "./components/Title";
+import Dropdown from "./components/Dropdown";
+import Product from "./components/Product";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -122,39 +125,25 @@ function App() {
     <>
       <div id="Container">
         <div id="Header">
-          <h2>New Collection</h2>
-          <select
+          <Title />
+          <Dropdown
             value={selectedCategory}
-            onChange={(e) => setSelectedCategoryHandler(e.target.value)}
-          >
-            {categories.map((category) => (
-              <option value={category} key={category}>
-                {category}
-              </option>
-            ))}
-          </select>
+            onChange={setSelectedCategoryHandler}
+            categories={categories}
+          />
         </div>
         <div id="Products">
           {loading ? (
             <ClipLoader color="#000" size={50} />
           ) : (
             products.map((product) => (
-              <div key={product.id} className="product-card">
-                <img
-                  src={product.image}
-                  alt={product.title}
-                  width="300"
-                  height="200"
-                />
-                <div className="product-info">
-                  <h3 className="product-title">{product.title}</h3>
-                  <p className="product-price">Price : {product.price}</p>
-                  <p className="product-rating">
-                    Rating : ⭐ {product.rating.rate}/5
-                  </p>
-                </div>
-                <button className="add-to-cart">Add to cart</button>
-              </div>
+              <Product
+                key={product.id}
+                product={product}
+                width="300"
+                height="200"
+                title="Add to cart"
+              />
             ))
           )}
         </div>
