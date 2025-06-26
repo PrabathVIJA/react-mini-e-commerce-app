@@ -1,6 +1,6 @@
 import React from "react";
 
-function Product({ product, width, height, title }) {
+function Product({ product, width, height, title, modalHandler }) {
   return (
     <div key={product.id} className="product-card">
       <img
@@ -8,6 +8,7 @@ function Product({ product, width, height, title }) {
         alt={product.title}
         width={width}
         height={height}
+        onClick={() => modalHandler(product.image)}
       />
       <div className="product-info">
         <h3 className="product-title">{product.title}</h3>

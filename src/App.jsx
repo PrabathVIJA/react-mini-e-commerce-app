@@ -6,12 +6,15 @@ import Title from "./components/Title";
 import Dropdown from "./components/Dropdown";
 import Product from "./components/Product";
 import { FaShoppingCart } from "react-icons/fa";
+import Modal from "./components/Modal";
 
 function App() {
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalImage, setModalImage] = useState();
 
   // useEffect to show all products
   useEffect(() => {
@@ -122,6 +125,11 @@ function App() {
   function setSelectedCategoryHandler(category) {
     setSelectedCategory(category);
   }
+
+  function handleImageClick(imageUrl) {
+    setModalImage(imageUrl);
+    setModalOpen(true);
+  }
   return (
     <>
       <div id="Container">
@@ -147,11 +155,13 @@ function App() {
                 width="300"
                 height="200"
                 title="Add to cart"
+                modalHandler={handleImageClick}
               />
             ))
           )}
         </div>
       </div>
+      {modalOpen && <Modal setModalOpen={setModalOpen} src={modalImage} />}
       <ToastContainer position="top-right" autoClose={3000} />
     </>
   );
