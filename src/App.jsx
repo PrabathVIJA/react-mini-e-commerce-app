@@ -15,6 +15,7 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState();
+  const [cartItems, setCartItems] = useState([]);
 
   // useEffect to show all products
   useEffect(() => {
