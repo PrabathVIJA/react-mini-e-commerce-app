@@ -61,7 +61,7 @@
   font-size: small;
   cursor: pointer;
   font-weight: bolder;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 .add-to-cart:hover {
   background-color: blue;
