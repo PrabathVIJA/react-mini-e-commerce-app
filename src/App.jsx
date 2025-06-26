@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import Title from "./components/Title";
 import Dropdown from "./components/Dropdown";
 import Product from "./components/Product";
+import { FaShoppingCart } from "react-icons/fa";
 
 function App() {
   const [loading, setLoading] = useState(false);
