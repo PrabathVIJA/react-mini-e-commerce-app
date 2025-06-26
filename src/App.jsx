@@ -132,6 +132,9 @@ function App() {
             onChange={setSelectedCategoryHandler}
             categories={categories}
           />
+          <div>
+            <FaShoppingCart size={30} color="white" />
+          </div>
         </div>
         <div id="Products">
           {loading ? (
