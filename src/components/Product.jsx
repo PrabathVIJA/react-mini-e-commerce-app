@@ -1,6 +1,14 @@
 import React from "react";
 
-function Product({ product, width, height, title, modalHandler }) {
+function Product({
+  product,
+  width,
+  height,
+  title,
+  modalHandler,
+  cartItemHandler,
+  isInCart,
+}) {
   return (
     <div key={product.id} className="product-card">
       <img
@@ -15,7 +23,13 @@ function Product({ product, width, height, title, modalHandler }) {
         <p className="product-price">Price : {product.price}</p>
         <p className="product-rating">Rating : ⭐ {product.rating.rate}/5</p>
       </div>
-      <button className="add-to-cart">{title}</button>
+      <button
+        className="add-to-cart"
+        onClick={() => cartItemHandler(product)}
+        disabled={isInCart}
+      >
+        {isInCart ? "Added" : title}
+      </button>
     </div>
   );
 }

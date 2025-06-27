@@ -69,7 +69,7 @@ function App() {
           throw new Error("Can't fetch products from the server.");
         }
         const data = await response.json();
-        console.log(data);
+
         setProducts(data || []);
       } catch (e) {
         toast.error(e.message);
@@ -131,6 +131,17 @@ function App() {
     setModalImage(imageUrl);
     setModalOpen(true);
   }
+
+  function cartItemHandler(product) {
+    const productAlreadyExists = cartItems.some(
+      (cartItem) => cartItem.id === product.id
+    );
+    if (!productAlreadyExists) {
+      setCartItems((prevProducts) => [...prevProducts, product]);
+      toast.info(`${product.title} added to the cart`);
+      return;
+    }
+  }
   return (
     <>
       <div id="Container">
@@ -141,8 +152,9 @@ function App() {
             onChange={setSelectedCategoryHandler}
             categories={categories}
           />
-          <div>
+          <div className="cart-icon-wrapper">
             <FaShoppingCart size={30} color="white" />
+            <span className="cart-badge">{cartItems.length}</span>
           </div>
         </div>
         <div id="Products">
@@ -157,6 +169,10 @@ function App() {
                 height="200"
                 title="Add to cart"
                 modalHandler={handleImageClick}
+                cartItemHandler={cartItemHandler}
+                isInCart={cartItems.some(
+                  (cartItem) => cartItem.id === product.id
+                )}
               />
             ))
           )}
