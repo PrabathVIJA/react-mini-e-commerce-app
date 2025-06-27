@@ -17,6 +17,19 @@ function App() {
   const [modalImage, setModalImage] = useState();
   const [cartItems, setCartItems] = useState([]);
 
+  // for getting data from localStorage
+  useEffect(() => {
+    const savedCartItems = JSON.parse(localStorage.getItem("react-cart-items"));
+
+    if (savedCartItems) {
+      toast.info("Fetching data from local storage...");
+      setCartItems(savedCartItems);
+    }
+  }, []);
+  // writing into local storage
+  useEffect(() => {
+    localStorage.setItem("react-cart-items", JSON.stringify(cartItems));
+  }, [cartItems]);
   // useEffect to show all products
   useEffect(() => {
     setLoading(true);
