@@ -7,6 +7,7 @@ import Dropdown from "./components/Dropdown";
 import Product from "./components/Product";
 import { FaShoppingCart } from "react-icons/fa";
 import Modal from "./components/Modal";
+import CartPage from "./components/CartPage";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -16,6 +17,7 @@ function App() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState();
   const [cartItems, setCartItems] = useState([]);
+  const [showCartPage, setShowCartPage] = useState(false);
 
   // for getting data from localStorage
   useEffect(() => {
@@ -155,42 +157,53 @@ function App() {
       return;
     }
   }
+
+  function showCartHandler() {
+    setShowCartPage(true);
+  }
   return (
     <>
-      <div id="Container">
-        <div id="Header">
-          <Title />
-          <Dropdown
-            value={selectedCategory}
-            onChange={setSelectedCategoryHandler}
-            categories={categories}
-          />
-          <div className="cart-icon-wrapper">
-            <FaShoppingCart size={30} color="white" />
-            <span className="cart-badge">{cartItems.length}</span>
+      {showCartPage ? (
+        <CartPage />
+      ) : (
+        <div id="Container">
+          <div id="Header">
+            <Title />
+            <Dropdown
+              value={selectedCategory}
+              onChange={setSelectedCategoryHandler}
+              categories={categories}
+            />
+            <button onClick={showCartHandler} className="cart-button">
+              <div className="cart-icon-wrapper">
+                <FaShoppingCart size={30} color="white" />
+                <span className="cart-badge">{cartItems.length}</span>
+              </div>
+            </button>
+          </div>
+          <div id="Products">
+            {loading ? (
+              <ClipLoader color="#000" size={50} />
+            ) : (
+              products.map((product) => (
+                <Product
+                  key={product.id}
+                  product={product}
+                  width="300"
+                  height="200"
+                  title="Add to cart"
+                  modalHandler={handleImageClick}
+                  cartItemHandler={cartItemHandler}
+                  isInCart={cartItems.some(
+                    (cartItem) => cartItem.id === product.id
+                  )}
+                />
+              ))
+            )}
           </div>
         </div>
-        <div id="Products">
-          {loading ? (
-            <ClipLoader color="#000" size={50} />
-          ) : (
-            products.map((product) => (
-              <Product
-                key={product.id}
-                product={product}
-                width="300"
-                height="200"
-                title="Add to cart"
-                modalHandler={handleImageClick}
-                cartItemHandler={cartItemHandler}
-                isInCart={cartItems.some(
-                  (cartItem) => cartItem.id === product.id
-                )}
-              />
-            ))
-          )}
-        </div>
-      </div>
+      )}
+
       {modalOpen && <Modal setModalOpen={setModalOpen} src={modalImage} />}
       <ToastContainer position="top-right" autoClose={3000} />
     </>
