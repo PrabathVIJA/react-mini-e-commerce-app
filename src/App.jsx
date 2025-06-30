@@ -164,7 +164,7 @@ function App() {
   return (
     <>
       {showCartPage ? (
-        <CartPage />
+        <CartPage selectedItems={cartItems} />
       ) : (
         <div id="Container">
           <div id="Header">
