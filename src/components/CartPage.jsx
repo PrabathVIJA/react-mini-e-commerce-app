@@ -1,16 +1,19 @@
 import React from "react";
 import { MdDeleteForever, MdAdd } from "react-icons/md";
-export default function CartPage({ selectedItems }) {
+export default function CartPage({ selectedItems, deleteHandler }) {
   return (
     <div className="cart-page-container">
       <div className="cart-page-title">Cart Page</div>
       <div className="product-container">
         <div className="selected-products">
           {selectedItems.map((selectedItem) => (
-            <div className="individual-product">
+            <div key={selectedItem.id} className="individual-product">
               <p>{selectedItem.title}</p>
               <img src={selectedItem.image} />
-              <button className="delete-button">
+              <button
+                className="delete-button"
+                onClick={() => deleteHandler(selectedItem)}
+              >
                 <MdDeleteForever className="delete-icon" size="1.7em" />
               </button>
               <div>

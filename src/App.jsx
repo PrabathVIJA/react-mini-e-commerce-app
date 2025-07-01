@@ -161,10 +161,19 @@ function App() {
   function showCartHandler() {
     setShowCartPage(true);
   }
+
+  function deleteCartItem(product) {
+    const updatedCart = cartItems.filter(
+      (cartItem) => cartItem.id !== product.id
+    );
+    console.log(updatedCart);
+
+    setCartItems(updatedCart);
+  }
   return (
     <>
       {showCartPage ? (
-        <CartPage selectedItems={cartItems} />
+        <CartPage selectedItems={cartItems} deleteHandler={deleteCartItem} />
       ) : (
         <div id="Container">
           <div id="Header">
