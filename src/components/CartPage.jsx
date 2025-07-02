@@ -17,7 +17,9 @@ export default function CartPage({ selectedItems, deleteHandler }) {
                 <MdDeleteForever className="delete-icon" size="1.7em" />
               </button>
               <div>
-                <span className="total-item-field">1</span>
+                <span className="total-item-field">
+                  {selectedItem.quantity}
+                </span>
                 <button className="increment-button">
                   <MdAdd size="1.5em" />
                 </button>

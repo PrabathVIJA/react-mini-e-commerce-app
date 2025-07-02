@@ -152,7 +152,8 @@ function App() {
       (cartItem) => cartItem.id === product.id
     );
     if (!productAlreadyExists) {
-      setCartItems((prevProducts) => [...prevProducts, product]);
+      const newProduct = { ...product, quantity: 1 };
+      setCartItems((prevProducts) => [...prevProducts, newProduct]);
       toast.info(`${product.title} added to the cart`);
       return;
     }
@@ -170,6 +171,11 @@ function App() {
 
     setCartItems(updatedCart);
   }
+
+  // function incrementHandler()
+  // {
+
+  // }
   return (
     <>
       {showCartPage ? (
