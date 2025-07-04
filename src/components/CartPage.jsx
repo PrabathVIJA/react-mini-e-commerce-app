@@ -1,9 +1,21 @@
 import React from "react";
-import { MdDeleteForever, MdAdd } from "react-icons/md";
-export default function CartPage({ selectedItems, deleteHandler }) {
+import { MdDeleteForever, MdAdd, MdArrowBack, MdRemove } from "react-icons/md";
+export default function CartPage({
+  selectedItems,
+  deleteHandler,
+  incrementHandle,
+  hideCart,
+  total,
+  decrementHandle,
+}) {
   return (
     <div className="cart-page-container">
-      <div className="cart-page-title">Cart Page</div>
+      <div className="cart-page-title">
+        <button onClick={hideCart}>
+          <MdArrowBack size={24} /> Back
+        </button>
+        Cart Page
+      </div>
       <div className="product-container">
         <div className="selected-products">
           {selectedItems.map((selectedItem) => (
@@ -17,10 +29,16 @@ export default function CartPage({ selectedItems, deleteHandler }) {
                 <MdDeleteForever className="delete-icon" size="1.7em" />
               </button>
               <div>
+                <button onClick={() => decrementHandle(selectedItem)}>
+                  <MdRemove size="1.5em" />
+                </button>
                 <span className="total-item-field">
                   {selectedItem.quantity}
                 </span>
-                <button className="increment-button">
+                <button
+                  onClick={() => incrementHandle(selectedItem)}
+                  className="increment-button"
+                >
                   <MdAdd size="1.5em" />
                 </button>
               </div>
@@ -29,7 +47,7 @@ export default function CartPage({ selectedItems, deleteHandler }) {
         </div>
         <div className="price-checkout">
           <div>
-            <p>Total Price :</p>
+            <p>Total Price :{total.toFixed()}</p>
             <button>CheckOut</button>
           </div>
         </div>

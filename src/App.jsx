@@ -146,7 +146,7 @@ function App() {
     setModalImage(imageUrl);
     setModalOpen(true);
   }
-
+  // adding item to cart
   function cartItemHandler(product) {
     const productAlreadyExists = cartItems.some(
       (cartItem) => cartItem.id === product.id
@@ -160,9 +160,9 @@ function App() {
   }
 
   function showCartHandler() {
-    setShowCartPage(true);
+    setShowCartPage((prevState) => !prevState);
   }
-
+  // delete cart
   function deleteCartItem(product) {
     const updatedCart = cartItems.filter(
       (cartItem) => cartItem.id !== product.id
@@ -172,14 +172,41 @@ function App() {
     setCartItems(updatedCart);
   }
 
-  // function incrementHandler()
-  // {
+  function incrementHandler(product) {
+    const updatedCartItems = cartItems.map((item) => {
+      if (item.id === product.id) {
+        return { ...item, quantity: item.quantity + 1 };
+      }
 
-  // }
+      return item;
+    });
+    setCartItems(updatedCartItems);
+  }
+  function decrementHandler(product) {
+    const updatedCartItems = cartItems.map((item) => {
+      if (item.id === product.id) {
+        return { ...item, quantity: item.quantity - 1 };
+      }
+      return item;
+    });
+    setCartItems(updatedCartItems);
+  }
+  // calculating Total price
+  const totalPrice = cartItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
   return (
     <>
       {showCartPage ? (
-        <CartPage selectedItems={cartItems} deleteHandler={deleteCartItem} />
+        <CartPage
+          selectedItems={cartItems}
+          deleteHandler={deleteCartItem}
+          incrementHandle={incrementHandler}
+          decrementHandle={decrementHandler}
+          hideCart={showCartHandler}
+          total={totalPrice}
+        />
       ) : (
         <div id="Container">
           <div id="Header">
