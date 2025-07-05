@@ -185,16 +185,14 @@ function App() {
 
   //decrement handler
   function decrementHandler(product) {
-    if (product.quantity <= 0) {
-      toast.info("Can''t go below than zero...");
-      return;
-    }
-    const updatedCartItems = cartItems.map((item) => {
-      if (item.id === product.id) {
-        return { ...item, quantity: item.quantity - 1 };
-      }
-      return item;
-    });
+    const updatedCartItems = cartItems
+      .map((item) => {
+        if (item.id === product.id) {
+          return { ...item, quantity: item.quantity - 1 };
+        }
+        return item;
+      })
+      .filter((item) => item.quantity !== 0);
     setCartItems(updatedCartItems);
   }
   // calculating Total price
