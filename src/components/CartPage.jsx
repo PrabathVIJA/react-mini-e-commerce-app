@@ -21,7 +21,7 @@ export default function CartPage({
           {selectedItems.map((selectedItem) => (
             <div key={selectedItem.id} className="individual-product">
               <p>{selectedItem.title}</p>
-              <img src={selectedItem.image} />
+              <img src={selectedItem.image} alt={selectedItem.title} />
               <button
                 className="delete-button"
                 onClick={() => deleteHandler(selectedItem)}
