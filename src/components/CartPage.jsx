@@ -47,7 +47,7 @@ export default function CartPage({
         </div>
         <div className="price-checkout">
           <div>
-            <p>Total Price :{total.toFixed()}</p>
+            <p>Total Price :{total.toFixed(2)}</p>
             <button>CheckOut</button>
           </div>
         </div>
